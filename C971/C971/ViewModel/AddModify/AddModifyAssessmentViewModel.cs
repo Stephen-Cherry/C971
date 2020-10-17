@@ -1,12 +1,13 @@
 ﻿using C971.Models;
 using System;
+using System.Collections.Generic;
 
 namespace C971.ViewModel
 {
     public class AddModifyAssessmentViewModel : BaseViewModel
     {
         public Assessment Assessment { get; set; }
-
+        public IList<AssessmentType> AssessmentTypeList { get; set; }
         public bool IsNewAssessment { get; set; }
 
         public String AssessmentTitle
@@ -58,10 +59,15 @@ namespace C971.ViewModel
             }
         }
 
+        async void InitializeAssessmentTypeList()
+        {
+            AssessmentTypeList = await DataStore.GetAssessmentTypesAsync();
+        }
+
         public AddModifyAssessmentViewModel(Assessment assessment = null)
         {
             IsNewAssessment = assessment == null;
-
+            InitializeAssessmentTypeList();
             Title = IsNewAssessment ? "Add Assessment" : "Edit Assessment";
             Assessment = assessment ?? new Assessment();
         }

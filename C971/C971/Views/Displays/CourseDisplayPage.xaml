@@ -7,16 +7,16 @@
     </ContentPage.ToolbarItems>
     <ScrollView>
         <StackLayout>
-            <Label HorizontalTextAlignment="Center" Text="{Binding Course.CourseTitle}" FontSize="Title" />
-            <Label HorizontalTextAlignment="Center" Text="{Binding Course.CourseStartDate, StringFormat='{}Start Date: {0:dd-MMM-yyyy}'}" FontSize="Medium" />
-            <Label HorizontalTextAlignment="Center" Text="{Binding Course.CourseEndDate, StringFormat='{}End Date: {0:dd-MMM-yyyy}'}" FontSize="Medium" />
-            <Label HorizontalTextAlignment="Center" Text="{Binding Course.CourseStatus, StringFormat='{}Course Status: {0}'}" FontSize="Medium" />
-            <Label HorizontalTextAlignment="Center" Text="{Binding Course.InstructorName, StringFormat='{}Instructor Name: {0}'}" FontSize="Medium" />
-            <Label HorizontalTextAlignment="Center" Text="{Binding Course.InstructorEmail, StringFormat='{}Instructor Email: {0}'}" FontSize="Medium" />
-            <Label HorizontalTextAlignment="Center" Text="{Binding Course.InstructorPhone, StringFormat='{}Instructor Phone: {0}'}" FontSize="Medium" />
-            <Label HorizontalTextAlignment="Center" Text="{Binding Course.CourseNotes, StringFormat='{}Course Notes: {0}'}" FontSize="Medium" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding CourseTitle}" FontSize="Title" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding CourseStartDate, StringFormat='{}Start Date: {0:dd-MMM-yyyy}'}" FontSize="Medium" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding CourseEndDate, StringFormat='{}End Date: {0:dd-MMM-yyyy}'}" FontSize="Medium" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding CourseStatus, StringFormat='{}Course Status: {0}'}" FontSize="Medium" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding InstructorName, StringFormat='{}Instructor Name: {0}'}" FontSize="Medium" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding InstructorEmail, StringFormat='{}Instructor Email: {0}'}" FontSize="Medium" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding InstructorPhone, StringFormat='{}Instructor Phone: {0}'}" FontSize="Medium" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding CourseNotes, StringFormat='{}Course Notes: {0}'}" FontSize="Medium" />
             <BoxView Color="Gray" HeightRequest="8" />
-            <Label HorizontalTextAlignment="Center" Text="{Binding Course.CourseTitle, StringFormat='{0} Assessments'}" FontSize="Title" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding CourseTitle, StringFormat='{0} Assessments'}" FontSize="Title" />
             <ListView x:Name="AssessmentsListView" ItemsSource="{Binding Assessments}" VerticalOptions="FillAndExpand" HasUnevenRows="true" 
                   RefreshCommand="{Binding LoadAssessmentsCommand}" IsPullToRefreshEnabled="true" IsRefreshing="{Binding IsBusy, Mode=OneWay}" CachingStrategy="RecycleElement" 
                   ItemSelected="Assessment_Clicked">

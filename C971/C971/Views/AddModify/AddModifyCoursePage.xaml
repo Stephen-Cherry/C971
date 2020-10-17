@@ -26,7 +26,7 @@
             <Label Text="Instructor Email:" FontSize="Medium" />
             <Entry x:Name="InstructorEmail" Text="{Binding InstructorEmail}" Placeholder="Instructor Email" FontSize="Small" />
             <Label Text="Notes:" FontSize="Medium" />
-            <Editor x:Name="CourseNotes" AutoSize="TextChanges" Placeholder="Notes" FontSize="Small" />
+            <Editor x:Name="CourseNotes" AutoSize="TextChanges" Text="{Binding CourseNotes}" Placeholder="Notes" FontSize="Small" />
         </StackLayout>
         </ScrollView>
     </ContentPage.Content>

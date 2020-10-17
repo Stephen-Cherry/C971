@@ -7,11 +7,11 @@
     </ContentPage.ToolbarItems>
     <ScrollView>
         <StackLayout>
-            <Label HorizontalTextAlignment="Center" Text="{Binding Title}" FontSize="Title" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding TermTitle}" FontSize="Title" />
             <Label HorizontalTextAlignment="Center" Text="{Binding TermStartDate, StringFormat='{}Start Date: {0:dd-MMM-yyyy}'}" FontSize="Medium" />
             <Label HorizontalTextAlignment="Center" Text="{Binding TermEndDate, StringFormat='{}End Date: {0:dd-MMM-yyyy}'}" FontSize="Medium" />
             <BoxView Color="Gray" HeightRequest="8" />
-            <Label HorizontalTextAlignment="Center" Text="{Binding Term.TermTitle, StringFormat='{0} Courses'}" FontSize="Title" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding TermTitle, StringFormat='{0} Courses'}" FontSize="Title" />
             <ListView x:Name="CoursesListView" ItemsSource="{Binding Courses}" VerticalOptions="FillAndExpand" HasUnevenRows="true" 
                   RefreshCommand="{Binding LoadCoursesCommand}" IsPullToRefreshEnabled="true" IsRefreshing="{Binding IsBusy, Mode=OneWay}" CachingStrategy="RecycleElement" 
                   ItemSelected="Course_Clicked">

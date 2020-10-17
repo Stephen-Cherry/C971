@@ -19,7 +19,6 @@
                 <DatePicker x:Name="AssessmentEndDate" Date="{Binding AssessmentEndDate}" FontSize="Small" />
                 <Label Text="Assessment Type:" FontSize="Medium" />
                 <Picker x:Name="AssessmentType" ItemsSource="{Binding AssessmentTypeList}" SelectedItem="{Binding AssessmentType}" Title="Assessment Type" FontSize="Medium" />
-                <Label Text="Instructor Name:" FontSize="Medium" />
                 <Label Text="Notes:" FontSize="Medium" />
                 <Editor x:Name="AssessmentNotes" AutoSize="TextChanges" Placeholder="Notes" FontSize="Small" Text="{Binding AssessmentNotes}" />
             </StackLayout>

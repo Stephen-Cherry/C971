@@ -16,11 +16,49 @@ namespace C971.ViewModel
         public AssessmentDisplayViewModel(Assessment assessment)
         {
             Assessment = assessment;
+            PopulateAssessmentView(assessment);
 
-            MessagingCenter.Subscribe<AddModifyAssessmentPage, Term>(this, "UpdateAssesment",
-                 (sender, updateAssessment) =>
+            MessagingCenter.Subscribe<AddModifyAssessmentPage, Assessment>(this, "UpdateAssesment",
+                 (sender, updatedassessment) =>
                  {
+                     PopulateAssessmentView(updatedassessment);
                  });
+        }
+
+        private void PopulateAssessmentView(Assessment assessment)
+        {
+            AssessmentTitle = assessment.AssessmentTitle;
+            AssessmentStartDate = assessment.AssessmentStartDate.ToString("dd-MMM-yyyy");
+            AssessmentEndDate = assessment.AssessmentEndDate.ToString("dd-MMM-yyyy");
+            AssessmentNotes = assessment.AssessmentNotes;
+        }
+
+        string assessmenttitle = string.Empty;
+        public string AssessmentTitle
+        {
+            get { return assessmenttitle; }
+            set { SetProperty(ref assessmenttitle, value); }
+        }
+
+        string assessmentstartdate = string.Empty;
+        public string AssessmentStartDate
+        {
+            get { return assessmentstartdate; }
+            set { SetProperty(ref assessmentstartdate, value); }
+        }
+
+        string assessmentenddate = string.Empty;
+        public string AssessmentEndDate
+        {
+            get { return assessmentenddate; }
+            set { SetProperty(ref assessmentenddate, value); }
+        }
+
+        string assessmentnotes = string.Empty;
+        public string AssessmentNotes
+        {
+            get { return assessmentnotes; }
+            set { SetProperty(ref assessmentnotes, value); }
         }
     }
 }

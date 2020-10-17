@@ -242,5 +242,16 @@ namespace C971.Services
             }
             return await Task.FromResult(CourseStatusList);
         }
+
+        public async Task<IList<AssessmentType>> GetAssessmentTypesAsync()
+        {
+            List<AssessmentType> AssessmentTypeList = new List<AssessmentType>();
+
+            foreach (AssessmentType coursestatus in (AssessmentType[])Enum.GetValues(typeof(AssessmentType)))
+            {
+                AssessmentTypeList.Add(coursestatus);
+            }
+            return await Task.FromResult(AssessmentTypeList);
+        }
     }
 }

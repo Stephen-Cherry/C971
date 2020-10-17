@@ -18,9 +18,7 @@ namespace C971.ViewModel
         public TermDisplayViewModel(Term term)
         {
             Term = term;
-            Title = term.TermTitle;
-            TermStartDate = term.TermStartDate.ToString("dd-MMM-yyyy");
-            TermEndDate = term.TermEndDate.ToString("dd-MMM-yyyy");
+            PopulateTermView(term);
             Courses = new ObservableCollection<Course>();
             LoadCoursesCommand = new Command(async () => await ExecuteLoadCoursesCommand());
 
@@ -41,11 +39,9 @@ namespace C971.ViewModel
                 });
 
             MessagingCenter.Subscribe<AddModifyTermPage, Term>(this, "UpdateTerm",
-                 (sender, updateTerm) =>
+                 (sender, updatedTerm) =>
                  {
-                     Title = term.TermTitle;
-                     TermStartDate = term.TermStartDate.ToString("dd-MMM-yyyy");
-                     TermEndDate = term.TermEndDate.ToString("dd-MMM-yyyy");
+                     PopulateTermView(updatedTerm);
                  });
 
             MessagingCenter.Subscribe<TermDisplayPage, Course>(this, "DeleteCourse",
@@ -54,6 +50,21 @@ namespace C971.ViewModel
                 await DataStore.DeleteCourseAsync(course);
                 await ExecuteLoadCoursesCommand();
             });
+        }
+
+        private void PopulateTermView(Term term)
+        {
+            TermTitle = term.TermTitle;
+            TermStartDate = term.TermStartDate.ToString("dd-MMM-yyyy");
+            TermEndDate = term.TermEndDate.ToString("dd-MMM-yyyy");
+        }
+
+        private string termtitle = string.Empty;
+
+        public string TermTitle
+        {
+            get { return termtitle; }
+            set { SetProperty(ref termtitle, value); }
         }
 
         private string termstartdate = string.Empty;

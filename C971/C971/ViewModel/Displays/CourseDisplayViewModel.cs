@@ -19,9 +19,7 @@ namespace C971.ViewModel
         public CourseDisplayViewModel(Course course)
         {
             Course = course;
-            Title = course.CourseTitle;
-            CourseStartDate = course.CourseStartDate.ToString("dd-MMM-yyyy");
-            CourseEndDate = course.CourseEndDate.ToString("dd-MMM-yyyy");
+            PopulateCourseView(course);
             Assessments = new ObservableCollection<Assessment>();
             LoadAssessmentsCommand = new Command(async () => await ExecuteLoadAssessmentsCommand());
 
@@ -41,33 +39,87 @@ namespace C971.ViewModel
                     await ExecuteLoadAssessmentsCommand();
                 });
 
-            MessagingCenter.Subscribe<AddModifyCoursePage, Term>(this, "UpdateCourse",
-                 (sender, updateTerm) =>
+            MessagingCenter.Subscribe<AddModifyCoursePage, Course>(this, "UpdateCourse",
+                 (sender, updatedcourse) =>
                  {
-                     Title = course.CourseTitle;
-                     CourseStartDate = course.CourseStartDate.ToString("dd-MMM-yyyy");
-                     CourseEndDate = course.CourseEndDate.ToString("dd-MMM-yyyy");
+                     PopulateCourseView(updatedcourse);
+
                  });
 
-            MessagingCenter.Subscribe<TermDisplayPage, Assessment>(this, "DeleteAssessment",
+            MessagingCenter.Subscribe<AssessmentDisplayPage, Assessment>(this, "DeleteAssessment",
                 async (sender, assessment) =>
                 {
                     await DataStore.DeleteAssessmentAsync(assessment);
                     await ExecuteLoadAssessmentsCommand();
                 });
         }
+
+        private void PopulateCourseView(Course course)
+        {
+            CourseTitle = course.CourseTitle;
+            CourseStartDate = course.CourseStartDate.ToString("dd-MMM-yyyy");
+            CourseEndDate = course.CourseEndDate.ToString("dd-MMM-yyyy");
+            CourseStatus = course.CourseStatus.ToString();
+            InstructorName = course.InstructorName;
+            InstructorEmail = course.InstructorEmail;
+            InstructorPhone = course.InstructorPhone;
+            CourseNotes = course.CourseNotes;
+        }
+
+        string coursetitle = string.Empty;
+        public string CourseTitle
+        {
+            get { return coursetitle; }
+            set { SetProperty(ref coursetitle, value); }
+        }
+
         string coursestartdate = string.Empty;
         public string CourseStartDate
         {
-            get { return CourseStartDate; }
+            get { return coursestartdate; }
             set { SetProperty(ref coursestartdate, value); }
         }
 
         string courseenddate = string.Empty;
         public string CourseEndDate
         {
-            get { return CourseEndDate; }
+            get { return courseenddate; }
             set { SetProperty(ref courseenddate, value); }
+        }
+
+        string coursestatus = string.Empty;
+        public string CourseStatus
+        {
+            get { return coursestatus; }
+            set { SetProperty(ref coursestatus, value); }
+        }
+
+        string instructorname = string.Empty;
+        public string InstructorName
+        {
+            get { return instructorname; }
+            set { SetProperty(ref instructorname, value); }
+        }
+
+        string instructoremail = string.Empty;
+        public string InstructorEmail
+        {
+            get { return instructoremail; }
+            set { SetProperty(ref instructoremail, value); }
+        }
+
+        string instructorphone = string.Empty;
+        public string InstructorPhone
+        {
+            get { return instructorphone; }
+            set { SetProperty(ref instructorphone, value); }
+        }
+
+        string coursenotes = string.Empty;
+        public string CourseNotes
+        {
+            get { return coursenotes; }
+            set { SetProperty(ref coursenotes, value); }
         }
         private async Task ExecuteLoadAssessmentsCommand()
         {

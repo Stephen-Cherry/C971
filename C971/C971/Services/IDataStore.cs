@@ -26,5 +26,6 @@ namespace C971.Services
         Task<Assessment> GetAssessmentAsync(int id);
         Task<IList<Assessment>> GetAssessmentsAsync();
         Task<bool> DeleteAssessmentAsync(Assessment assessment);
+        Task<IList<AssessmentType>> GetAssessmentTypesAsync();
     }
 }
