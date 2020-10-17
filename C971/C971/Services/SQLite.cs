@@ -24,25 +24,22 @@ namespace C971.Services
             DB.CreateTable<Course>();
             DB.CreateTable<Assessment>();
             MockDataCheck(DB);
+
         }
 
         private void MockDataCheck(SQLiteConnection db)
         {
             if (db.Table<Term>().Count() == 0)
             {
-                db.Insert(new Term() { TermTitle = "Term 1", TermStartDate = new DateTime(2021, 1, 1), TermEndDate = new DateTime(2021, 12, 31) });
-            }
-            if (db.Table<Course>().Count() == 0)
-            {
-                db.Insert(new Course() { CourseTitle = "Course 1", TermID = 1, CourseStartDate = new DateTime(2021, 1, 1), CourseEndDate = new DateTime(2021, 1, 31), CourseStatus = "Started", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
-                db.Insert(new Course() { CourseTitle = "Course 2", TermID = 1, CourseStartDate = new DateTime(2021, 2, 1), CourseEndDate = new DateTime(2021, 1, 28), CourseStatus = "Pending", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
-                db.Insert(new Course() { CourseTitle = "Course 3", TermID = 1, CourseStartDate = new DateTime(2021, 1, 1), CourseEndDate = new DateTime(2021, 1, 31), CourseStatus = "Started", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
-                db.Insert(new Course() { CourseTitle = "Course 4", TermID = 1, CourseStartDate = new DateTime(2021, 2, 1), CourseEndDate = new DateTime(2021, 1, 28), CourseStatus = "Pending", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
-                db.Insert(new Course() { CourseTitle = "Course 5", TermID = 1, CourseStartDate = new DateTime(2021, 1, 1), CourseEndDate = new DateTime(2021, 1, 31), CourseStatus = "Started", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
-                db.Insert(new Course() { CourseTitle = "Course 6", TermID = 1, CourseStartDate = new DateTime(2021, 2, 1), CourseEndDate = new DateTime(2021, 1, 28), CourseStatus = "Pending", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
-            }
-            if (db.Table<Assessment>().Count() == 0)
-            {
+                db.Insert(new Term() { TermID=1, TermTitle = "Term 1", TermStartDate = new DateTime(2021, 1, 1), TermEndDate = new DateTime(2021, 12, 31) });
+
+                db.Insert(new Course() { CourseID = 1, CourseTitle = "Course 1", TermID = 1, CourseStartDate = new DateTime(2021, 1, 1), CourseEndDate = new DateTime(2021, 1, 31), CourseStatus = "Started", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
+                db.Insert(new Course() { CourseID = 2, CourseTitle = "Course 2", TermID = 1, CourseStartDate = new DateTime(2021, 2, 1), CourseEndDate = new DateTime(2021, 1, 28), CourseStatus = "Pending", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
+                db.Insert(new Course() { CourseID = 3, CourseTitle = "Course 3", TermID = 1, CourseStartDate = new DateTime(2021, 1, 1), CourseEndDate = new DateTime(2021, 1, 31), CourseStatus = "Started", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
+                db.Insert(new Course() { CourseID = 4, CourseTitle = "Course 4", TermID = 1, CourseStartDate = new DateTime(2021, 2, 1), CourseEndDate = new DateTime(2021, 1, 28), CourseStatus = "Pending", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
+                db.Insert(new Course() { CourseID = 5, CourseTitle = "Course 5", TermID = 1, CourseStartDate = new DateTime(2021, 1, 1), CourseEndDate = new DateTime(2021, 1, 31), CourseStatus = "Started", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
+                db.Insert(new Course() { CourseID = 6, CourseTitle = "Course 6", TermID = 1, CourseStartDate = new DateTime(2021, 2, 1), CourseEndDate = new DateTime(2021, 1, 28), CourseStatus = "Pending", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
+
                 db.Insert(new Assessment() { CourseID = 1, AssessmentTitle = "Assessment 1", AssessmentType = AssessmentType.Objective, AssessmentStartDate = new DateTime(2021, 1, 1), AssessmentEndDate = new DateTime(2021, 2, 1) });
                 db.Insert(new Assessment() { CourseID = 1, AssessmentTitle = "Assessment 2", AssessmentType = AssessmentType.Performance, AssessmentStartDate = new DateTime(2021, 2, 1), AssessmentEndDate = new DateTime(2021, 3, 1) });
                 db.Insert(new Assessment() { CourseID = 2, AssessmentTitle = "Assessment 1", AssessmentType = AssessmentType.Objective, AssessmentStartDate = new DateTime(2021, 1, 1), AssessmentEndDate = new DateTime(2021, 2, 1) });
@@ -176,6 +173,42 @@ namespace C971.Services
                 db.Update(tableTerm);
             }
             return await Task.FromResult(termFound);
+        }
+
+        public async Task<bool> DeleteTermAsync(Term term)
+        {
+            bool IsSuccess = false;
+            DB.Delete(term);
+            
+            foreach (Course course in DB.Table<Course>())
+            {
+                if (course.TermID == term.TermID)
+                {
+                    DB.Delete(course);
+                    foreach (Assessment assessment in DB.Table<Assessment>())
+                    {
+                        if (assessment.CourseID == course.CourseID)
+                        {
+                            DB.Delete(assessment);
+                        }
+                    }
+                }
+
+
+            }
+            IsSuccess = true;
+
+            return await Task.FromResult(IsSuccess);
+        }
+
+        public Task<bool> DeleteCourseAsync(Course course)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteAssessmentAsync(Assessment assessment)
+        {
+            throw new NotImplementedException();
         }
     }
 }

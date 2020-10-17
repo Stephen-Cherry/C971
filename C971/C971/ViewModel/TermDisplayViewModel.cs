@@ -1,7 +1,5 @@
 ﻿using C971.Models;
-using C971.Services;
 using C971.Views;
-using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,19 +21,28 @@ namespace C971.ViewModel
             LoadTermsCommand = new Command(async () => await ExecuteLoadTermsCommand());
 
             MessagingCenter.Subscribe<AddModifyTermPage, Term>(this, "SaveTerm",
-                async (sender, term) => {
+                async (sender, term) =>
+                {
                     Terms.Add(term);
                     await DataStore.AddTermAsync(term);
                 });
 
             MessagingCenter.Subscribe<AddModifyTermPage, Term>(this, "UpdateTerm",
-                async (sender, term) => {
+                async (sender, term) =>
+                {
                     await DataStore.UpdateTermAsync(term, term.TermID);
                     await ExecuteLoadTermsCommand();
                 });
+
+            MessagingCenter.Subscribe<CourseDisplayPage, Term>(this, "DeleteTerm",
+    async (sender, term) =>
+    {
+        await DataStore.DeleteTermAsync(term);
+        await ExecuteLoadTermsCommand();
+    });
         }
 
-        async Task ExecuteLoadTermsCommand()
+        private async Task ExecuteLoadTermsCommand()
         {
             if (IsBusy)
                 return;

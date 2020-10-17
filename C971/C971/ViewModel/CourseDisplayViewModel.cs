@@ -49,7 +49,10 @@ namespace C971.ViewModel
                 IList<Course> courses = await DataStore.GetCoursesAsync();
                 foreach (Course course in courses)
                 {
-                    Courses.Add(course);
+                    if (course.TermID == Term.TermID)
+                    {
+                        Courses.Add(course);
+                    }
                 }
             }
             catch (Exception ex)

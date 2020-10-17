@@ -29,7 +29,13 @@ namespace C971.Views
 
         private async void Delete_Clicked(object sender, EventArgs args)
         {
-            await Navigation.PushAsync(new AssessmentDisplayPage());
+            var input = await DisplayAlert("Delete", "Delete Term?\n\nWARNING: THIS WILL DELETE COURSES AND ASSESSMENTS ASSOCIATED WITH THIS TERM!", "Yes", "No");
+            if (input == true)
+            {
+                var message = "DeleteTerm";
+                MessagingCenter.Send(this, message, viewModel.Term);
+                await Navigation.PopAsync();
+            }
         }
 
         private async void Course_Clicked(object sender, EventArgs e)
