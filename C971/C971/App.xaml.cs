@@ -20,7 +20,7 @@ namespace C971
 
         protected override void OnStart()
         {
-
+            SQLiteDataStore.FirstLaunch = true;
         }
 
         protected override void OnSleep()

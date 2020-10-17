@@ -25,10 +25,22 @@ namespace C971.Views
 
             viewModel = new AddModifyTermViewModel();
             BindingContext = viewModel;
+            viewModel.TermStartDate = DateTime.Now;
+            viewModel.TermEndDate = DateTime.Now;
         }
 
         private async void Save_Clicked(object sender, EventArgs e)
         {
+            if (TermTitle.Text == null)
+            {
+                await DisplayAlert("Error", "New term must include a title.", "Ok");
+                return;
+            }
+            if (StartDate.Date > EndDate.Date)
+            {
+                await DisplayAlert("Error", "The start date must be before the end date.", "Ok");
+                return;
+            }
             var input = await DisplayAlert("Save", "Save Term?", "Yes", "No");
             if (input == true)
             {

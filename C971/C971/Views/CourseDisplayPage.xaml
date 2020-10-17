@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="C971.Views.CourseDisplayPage" Title="{Binding Title}" x:Name="CourseDisplay">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="C971.Views.CourseDisplayPage" x:Name="CourseDisplay">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add Course" Clicked="Add_Clicked" />
         <ToolbarItem Text="Edit Term" Clicked="Edit_Clicked" />
         <ToolbarItem Text="Delete Term" Clicked="Delete_Clicked" />
     </ContentPage.ToolbarItems>
     <StackLayout>
-        <Label HorizontalTextAlignment="Center" Text="{Binding Term.TermTitle}" FontSize="Title" />
+        <Label HorizontalTextAlignment="Center" Text="{Binding Title}" FontSize="Title" />
         <ListView x:Name="TermsListView" ItemsSource="{Binding Courses}" VerticalOptions="FillAndExpand" HasUnevenRows="true" 
                   RefreshCommand="{Binding LoadCoursesCommand}" IsPullToRefreshEnabled="true" IsRefreshing="{Binding IsBusy, Mode=OneWay}" CachingStrategy="RecycleElement" 
                   ItemSelected="Course_Clicked">

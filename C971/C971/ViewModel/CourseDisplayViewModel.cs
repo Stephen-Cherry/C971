@@ -18,6 +18,7 @@ namespace C971.ViewModel
         public CourseDisplayViewModel(Term term)
         {
             Term = term;
+            Title = term.TermTitle;
             Courses = new ObservableCollection<Course>();
             LoadCoursesCommand = new Command(async () => await ExecuteLoadCoursesCommand());
 
@@ -34,6 +35,12 @@ namespace C971.ViewModel
                     await DataStore.UpdateCourseAsync(course, course.CourseID);
                     await ExecuteLoadCoursesCommand();
                 });
+
+            MessagingCenter.Subscribe<AddModifyTermPage, Term>(this, "UpdateTerm",
+                 (sender, updateTerm) =>
+                 {
+                     Title = term.TermTitle;
+                 });
         }
 
         private async Task ExecuteLoadCoursesCommand()

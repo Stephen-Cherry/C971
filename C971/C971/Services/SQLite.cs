@@ -17,6 +17,8 @@ namespace C971.Services
     {
         public SQLiteConnection DB { get; set; }
 
+        public static bool FirstLaunch { get; set; }
+
         public SQLiteDataStore()
         {
             DB = new SQLiteConnection(DBPath.dbPath);
@@ -24,35 +26,38 @@ namespace C971.Services
             DB.CreateTable<Course>();
             DB.CreateTable<Assessment>();
             MockDataCheck(DB);
-
         }
 
         private void MockDataCheck(SQLiteConnection db)
         {
-            if (db.Table<Term>().Count() == 0)
+            if (FirstLaunch == true)
             {
-                db.Insert(new Term() { TermID=1, TermTitle = "Term 1", TermStartDate = new DateTime(2021, 1, 1), TermEndDate = new DateTime(2021, 12, 31) });
+                if (db.Table<Term>().Count() == 0)
+                {
+                    db.Insert(new Term() { TermID = 1, TermTitle = "Term 1", TermStartDate = new DateTime(2021, 1, 1), TermEndDate = new DateTime(2021, 12, 31) });
 
-                db.Insert(new Course() { CourseID = 1, CourseTitle = "Course 1", TermID = 1, CourseStartDate = new DateTime(2021, 1, 1), CourseEndDate = new DateTime(2021, 1, 31), CourseStatus = "Started", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
-                db.Insert(new Course() { CourseID = 2, CourseTitle = "Course 2", TermID = 1, CourseStartDate = new DateTime(2021, 2, 1), CourseEndDate = new DateTime(2021, 1, 28), CourseStatus = "Pending", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
-                db.Insert(new Course() { CourseID = 3, CourseTitle = "Course 3", TermID = 1, CourseStartDate = new DateTime(2021, 1, 1), CourseEndDate = new DateTime(2021, 1, 31), CourseStatus = "Started", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
-                db.Insert(new Course() { CourseID = 4, CourseTitle = "Course 4", TermID = 1, CourseStartDate = new DateTime(2021, 2, 1), CourseEndDate = new DateTime(2021, 1, 28), CourseStatus = "Pending", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
-                db.Insert(new Course() { CourseID = 5, CourseTitle = "Course 5", TermID = 1, CourseStartDate = new DateTime(2021, 1, 1), CourseEndDate = new DateTime(2021, 1, 31), CourseStatus = "Started", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
-                db.Insert(new Course() { CourseID = 6, CourseTitle = "Course 6", TermID = 1, CourseStartDate = new DateTime(2021, 2, 1), CourseEndDate = new DateTime(2021, 1, 28), CourseStatus = "Pending", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
+                    db.Insert(new Course() { CourseID = 1, CourseTitle = "Course 1", TermID = 1, CourseStartDate = new DateTime(2021, 1, 1), CourseEndDate = new DateTime(2021, 1, 31), CourseStatus = "Started", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
+                    db.Insert(new Course() { CourseID = 2, CourseTitle = "Course 2", TermID = 1, CourseStartDate = new DateTime(2021, 2, 1), CourseEndDate = new DateTime(2021, 1, 28), CourseStatus = "Pending", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
+                    db.Insert(new Course() { CourseID = 3, CourseTitle = "Course 3", TermID = 1, CourseStartDate = new DateTime(2021, 1, 1), CourseEndDate = new DateTime(2021, 1, 31), CourseStatus = "Started", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
+                    db.Insert(new Course() { CourseID = 4, CourseTitle = "Course 4", TermID = 1, CourseStartDate = new DateTime(2021, 2, 1), CourseEndDate = new DateTime(2021, 1, 28), CourseStatus = "Pending", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
+                    db.Insert(new Course() { CourseID = 5, CourseTitle = "Course 5", TermID = 1, CourseStartDate = new DateTime(2021, 1, 1), CourseEndDate = new DateTime(2021, 1, 31), CourseStatus = "Started", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
+                    db.Insert(new Course() { CourseID = 6, CourseTitle = "Course 6", TermID = 1, CourseStartDate = new DateTime(2021, 2, 1), CourseEndDate = new DateTime(2021, 1, 28), CourseStatus = "Pending", InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", Notes = "N/A" });
 
-                db.Insert(new Assessment() { CourseID = 1, AssessmentTitle = "Assessment 1", AssessmentType = AssessmentType.Objective, AssessmentStartDate = new DateTime(2021, 1, 1), AssessmentEndDate = new DateTime(2021, 2, 1) });
-                db.Insert(new Assessment() { CourseID = 1, AssessmentTitle = "Assessment 2", AssessmentType = AssessmentType.Performance, AssessmentStartDate = new DateTime(2021, 2, 1), AssessmentEndDate = new DateTime(2021, 3, 1) });
-                db.Insert(new Assessment() { CourseID = 2, AssessmentTitle = "Assessment 1", AssessmentType = AssessmentType.Objective, AssessmentStartDate = new DateTime(2021, 1, 1), AssessmentEndDate = new DateTime(2021, 2, 1) });
-                db.Insert(new Assessment() { CourseID = 2, AssessmentTitle = "Assessment 2", AssessmentType = AssessmentType.Performance, AssessmentStartDate = new DateTime(2021, 2, 1), AssessmentEndDate = new DateTime(2021, 3, 1) });
-                db.Insert(new Assessment() { CourseID = 3, AssessmentTitle = "Assessment 1", AssessmentType = AssessmentType.Objective, AssessmentStartDate = new DateTime(2021, 1, 1), AssessmentEndDate = new DateTime(2021, 2, 1) });
-                db.Insert(new Assessment() { CourseID = 3, AssessmentTitle = "Assessment 2", AssessmentType = AssessmentType.Performance, AssessmentStartDate = new DateTime(2021, 2, 1), AssessmentEndDate = new DateTime(2021, 3, 1) });
-                db.Insert(new Assessment() { CourseID = 4, AssessmentTitle = "Assessment 1", AssessmentType = AssessmentType.Objective, AssessmentStartDate = new DateTime(2021, 1, 1), AssessmentEndDate = new DateTime(2021, 2, 1) });
-                db.Insert(new Assessment() { CourseID = 4, AssessmentTitle = "Assessment 2", AssessmentType = AssessmentType.Performance, AssessmentStartDate = new DateTime(2021, 2, 1), AssessmentEndDate = new DateTime(2021, 3, 1) });
-                db.Insert(new Assessment() { CourseID = 5, AssessmentTitle = "Assessment 1", AssessmentType = AssessmentType.Objective, AssessmentStartDate = new DateTime(2021, 1, 1), AssessmentEndDate = new DateTime(2021, 2, 1) });
-                db.Insert(new Assessment() { CourseID = 5, AssessmentTitle = "Assessment 2", AssessmentType = AssessmentType.Performance, AssessmentStartDate = new DateTime(2021, 2, 1), AssessmentEndDate = new DateTime(2021, 3, 1) });
-                db.Insert(new Assessment() { CourseID = 6, AssessmentTitle = "Assessment 1", AssessmentType = AssessmentType.Objective, AssessmentStartDate = new DateTime(2021, 1, 1), AssessmentEndDate = new DateTime(2021, 2, 1) });
-                db.Insert(new Assessment() { CourseID = 6, AssessmentTitle = "Assessment 2", AssessmentType = AssessmentType.Performance, AssessmentStartDate = new DateTime(2021, 2, 1), AssessmentEndDate = new DateTime(2021, 3, 1) });
+                    db.Insert(new Assessment() { CourseID = 1, AssessmentTitle = "Assessment 1", AssessmentType = AssessmentType.Objective, AssessmentStartDate = new DateTime(2021, 1, 1), AssessmentEndDate = new DateTime(2021, 2, 1) });
+                    db.Insert(new Assessment() { CourseID = 1, AssessmentTitle = "Assessment 2", AssessmentType = AssessmentType.Performance, AssessmentStartDate = new DateTime(2021, 2, 1), AssessmentEndDate = new DateTime(2021, 3, 1) });
+                    db.Insert(new Assessment() { CourseID = 2, AssessmentTitle = "Assessment 1", AssessmentType = AssessmentType.Objective, AssessmentStartDate = new DateTime(2021, 1, 1), AssessmentEndDate = new DateTime(2021, 2, 1) });
+                    db.Insert(new Assessment() { CourseID = 2, AssessmentTitle = "Assessment 2", AssessmentType = AssessmentType.Performance, AssessmentStartDate = new DateTime(2021, 2, 1), AssessmentEndDate = new DateTime(2021, 3, 1) });
+                    db.Insert(new Assessment() { CourseID = 3, AssessmentTitle = "Assessment 1", AssessmentType = AssessmentType.Objective, AssessmentStartDate = new DateTime(2021, 1, 1), AssessmentEndDate = new DateTime(2021, 2, 1) });
+                    db.Insert(new Assessment() { CourseID = 3, AssessmentTitle = "Assessment 2", AssessmentType = AssessmentType.Performance, AssessmentStartDate = new DateTime(2021, 2, 1), AssessmentEndDate = new DateTime(2021, 3, 1) });
+                    db.Insert(new Assessment() { CourseID = 4, AssessmentTitle = "Assessment 1", AssessmentType = AssessmentType.Objective, AssessmentStartDate = new DateTime(2021, 1, 1), AssessmentEndDate = new DateTime(2021, 2, 1) });
+                    db.Insert(new Assessment() { CourseID = 4, AssessmentTitle = "Assessment 2", AssessmentType = AssessmentType.Performance, AssessmentStartDate = new DateTime(2021, 2, 1), AssessmentEndDate = new DateTime(2021, 3, 1) });
+                    db.Insert(new Assessment() { CourseID = 5, AssessmentTitle = "Assessment 1", AssessmentType = AssessmentType.Objective, AssessmentStartDate = new DateTime(2021, 1, 1), AssessmentEndDate = new DateTime(2021, 2, 1) });
+                    db.Insert(new Assessment() { CourseID = 5, AssessmentTitle = "Assessment 2", AssessmentType = AssessmentType.Performance, AssessmentStartDate = new DateTime(2021, 2, 1), AssessmentEndDate = new DateTime(2021, 3, 1) });
+                    db.Insert(new Assessment() { CourseID = 6, AssessmentTitle = "Assessment 1", AssessmentType = AssessmentType.Objective, AssessmentStartDate = new DateTime(2021, 1, 1), AssessmentEndDate = new DateTime(2021, 2, 1) });
+                    db.Insert(new Assessment() { CourseID = 6, AssessmentTitle = "Assessment 2", AssessmentType = AssessmentType.Performance, AssessmentStartDate = new DateTime(2021, 2, 1), AssessmentEndDate = new DateTime(2021, 3, 1) });
+                }
             }
+            FirstLaunch = false;
         }
 
         public async Task<int> AddAssessmentAsync(Assessment assessment)
@@ -179,7 +184,7 @@ namespace C971.Services
         {
             bool IsSuccess = false;
             DB.Delete(term);
-            
+
             foreach (Course course in DB.Table<Course>())
             {
                 if (course.TermID == term.TermID)
@@ -193,8 +198,6 @@ namespace C971.Services
                         }
                     }
                 }
-
-
             }
             IsSuccess = true;
 
