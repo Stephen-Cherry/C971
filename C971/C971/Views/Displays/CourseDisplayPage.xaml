@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="C971.Views.CourseDisplayPage" x:Name="CourseDisplay">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add Assessment" Clicked="Add_Clicked" />
+        <ToolbarItem Text="Edit Course" Clicked="Edit_Clicked" />
+        <ToolbarItem Text="Delete Course" Clicked="Delete_Clicked" />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <StackLayout>
+            <Label HorizontalTextAlignment="Center" Text="{Binding Course.CourseTitle}" FontSize="Title" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding Course.CourseStartDate, StringFormat='{}Start Date: {0:dd-MMM-yyyy}'}" FontSize="Medium" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding Course.CourseEndDate, StringFormat='{}End Date: {0:dd-MMM-yyyy}'}" FontSize="Medium" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding Course.CourseStatus, StringFormat='{}Course Status: {0}'}" FontSize="Medium" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding Course.InstructorName, StringFormat='{}Instructor Name: {0}'}" FontSize="Medium" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding Course.InstructorEmail, StringFormat='{}Instructor Email: {0}'}" FontSize="Medium" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding Course.InstructorPhone, StringFormat='{}Instructor Phone: {0}'}" FontSize="Medium" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding Course.CourseNotes, StringFormat='{}Course Notes: {0}'}" FontSize="Medium" />
+            <BoxView Color="Gray" HeightRequest="8" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding Course.CourseTitle, StringFormat='{0} Assessments'}" FontSize="Title" />
+            <ListView x:Name="AssessmentsListView" ItemsSource="{Binding Assessments}" VerticalOptions="FillAndExpand" HasUnevenRows="true" 
+                  RefreshCommand="{Binding LoadAssessmentsCommand}" IsPullToRefreshEnabled="true" IsRefreshing="{Binding IsBusy, Mode=OneWay}" CachingStrategy="RecycleElement" 
+                  ItemSelected="Assessment_Clicked">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid BackgroundColor="LightGray" Margin="0,2,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="6*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="5*"/>
+                                </Grid.ColumnDefinitions>
+                                <BoxView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Color="Gray" HeightRequest="1" />
+                                <Label Text="{Binding AssessmentTitle}"  Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" VerticalTextAlignment="Center" FontSize="Medium" FontAttributes="Bold"/>
+                                <Label Text="{Binding AssessmentStartDate, StringFormat='{}Start Date: {0:d-MMM-yyyy}'}" Grid.Row="1" Grid.Column="2" FontSize="Small" FontAttributes="Bold"/>
+                                <Label Text="{Binding AssessmentEndDate, StringFormat='{}End Date: {0:d-MMM-yyyy}'}" Grid.Row="2" Grid.Column="2" FontSize="Small" FontAttributes="Bold"/>
+                                <BoxView Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Color="Gray" HeightRequest="1" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

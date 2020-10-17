@@ -15,7 +15,7 @@ namespace C971
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new TermDisplayPage());
+            MainPage = new NavigationPage(new MasterDisplayPage());
         }
 
         protected override void OnStart()

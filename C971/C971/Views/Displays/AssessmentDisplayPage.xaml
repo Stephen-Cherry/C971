@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="C971.Views.AssessmentDisplayPage" x:Name="AssessmentDisplay">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Edit Course" Clicked="Edit_Clicked" />
+        <ToolbarItem Text="Delete Course" Clicked="Delete_Clicked" />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <StackLayout>
+            <Label HorizontalTextAlignment="Center" Text="{Binding Assessment.AssessmentTitle}" FontSize="Title" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding Assessment.AssessmentStartDate, StringFormat='{}Start Date: {0:dd-MMM-yyyy}'}" FontSize="Medium" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding Assessment.AssessmentEndDate, StringFormat='{}End Date: {0:dd-MMM-yyyy}'}" FontSize="Medium" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding Assessment.AssessmentNotes}" FontSize="Title" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

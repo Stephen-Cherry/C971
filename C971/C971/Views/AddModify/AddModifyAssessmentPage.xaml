@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="C971.Views.AddModifyAssessmentPage"
+             Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Clicked="Save_Clicked" />
+        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="0,10,0,0">
+                <Label Text="Assessment Title:" FontSize="Medium" />
+                <Entry x:Name="AssessmentTitle" Text="{Binding AssessmentTitle}" Placeholder="Assessment Title" FontSize="Small" />
+                <Label Text="Start Date:" FontSize="Medium" />
+                <DatePicker x:Name="AssessmentStartDate" Date="{Binding AssessmentStartDate}" FontSize="Small" />
+                <Label Text="End Date:" FontSize="Medium" />
+                <DatePicker x:Name="AssessmentEndDate" Date="{Binding AssessmentEndDate}" FontSize="Small" />
+                <Label Text="Assessment Type:" FontSize="Medium" />
+                <Picker x:Name="AssessmentType" ItemsSource="{Binding AssessmentTypeList}" SelectedItem="{Binding AssessmentType}" Title="Assessment Type" FontSize="Medium" />
+                <Label Text="Instructor Name:" FontSize="Medium" />
+                <Label Text="Notes:" FontSize="Medium" />
+                <Editor x:Name="AssessmentNotes" AutoSize="TextChanges" Placeholder="Notes" FontSize="Small" Text="{Binding AssessmentNotes}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

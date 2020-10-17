@@ -9,23 +9,23 @@ using Xamarin.Forms;
 
 namespace C971.ViewModel
 {
-    internal class TermDisplayViewModel : BaseViewModel
+    internal class MasterDisplayViewModel : BaseViewModel
     {
         public ObservableCollection<Term> Terms { get; set; }
         public Command LoadTermsCommand { get; set; }
 
-        public TermDisplayViewModel()
+        public MasterDisplayViewModel()
         {
             Title = "Terms";
             Terms = new ObservableCollection<Term>();
             LoadTermsCommand = new Command(async () => await ExecuteLoadTermsCommand());
 
             MessagingCenter.Subscribe<AddModifyTermPage, Term>(this, "SaveTerm",
-                async (sender, term) =>
-                {
-                    Terms.Add(term);
-                    await DataStore.AddTermAsync(term);
-                });
+    async (sender, term) =>
+    {
+        Terms.Add(term);
+        await DataStore.AddTermAsync(term);
+    });
 
             MessagingCenter.Subscribe<AddModifyTermPage, Term>(this, "UpdateTerm",
                 async (sender, term) =>
@@ -34,7 +34,7 @@ namespace C971.ViewModel
                     await ExecuteLoadTermsCommand();
                 });
 
-            MessagingCenter.Subscribe<CourseDisplayPage, Term>(this, "DeleteTerm",
+            MessagingCenter.Subscribe<TermDisplayPage, Term>(this, "DeleteTerm",
     async (sender, term) =>
     {
         await DataStore.DeleteTermAsync(term);

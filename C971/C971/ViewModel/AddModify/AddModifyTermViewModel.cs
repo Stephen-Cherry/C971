@@ -43,7 +43,7 @@ namespace C971.ViewModel
         {
             IsNewTerm = term == null;
 
-            Title = IsNewTerm ? "Add Term" : "Modify Term";
+            Title = IsNewTerm ? "Add Term" : "Edit Term";
             Term = term ?? new Term();
         }
     }

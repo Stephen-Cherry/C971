@@ -9,22 +9,25 @@ using Xamarin.Forms;
 
 namespace C971.ViewModel
 {
-    public class CourseDisplayViewModel : BaseViewModel
+    public class TermDisplayViewModel : BaseViewModel
     {
         public ObservableCollection<Course> Courses { get; set; }
         public Term Term { get; set; }
         public Command LoadCoursesCommand { get; set; }
 
-        public CourseDisplayViewModel(Term term)
+        public TermDisplayViewModel(Term term)
         {
             Term = term;
             Title = term.TermTitle;
+            TermStartDate = term.TermStartDate.ToString("dd-MMM-yyyy");
+            TermEndDate = term.TermEndDate.ToString("dd-MMM-yyyy");
             Courses = new ObservableCollection<Course>();
             LoadCoursesCommand = new Command(async () => await ExecuteLoadCoursesCommand());
 
             MessagingCenter.Subscribe<AddModifyCoursePage, Course>(this, "SaveCourse",
                 async (sender, course) =>
                 {
+                    course.TermID = term.TermID;
                     Courses.Add(course);
                     await DataStore.AddCourseAsync(course);
                 });
@@ -32,6 +35,7 @@ namespace C971.ViewModel
             MessagingCenter.Subscribe<AddModifyCoursePage, Course>(this, "UpdateCourse",
                 async (sender, course) =>
                 {
+                    course.TermID = term.TermID;
                     await DataStore.UpdateCourseAsync(course, course.CourseID);
                     await ExecuteLoadCoursesCommand();
                 });
@@ -40,7 +44,32 @@ namespace C971.ViewModel
                  (sender, updateTerm) =>
                  {
                      Title = term.TermTitle;
+                     TermStartDate = term.TermStartDate.ToString("dd-MMM-yyyy");
+                     TermEndDate = term.TermEndDate.ToString("dd-MMM-yyyy");
                  });
+
+            MessagingCenter.Subscribe<TermDisplayPage, Course>(this, "DeleteCourse",
+            async (sender, course) =>
+            {
+                await DataStore.DeleteCourseAsync(course);
+                await ExecuteLoadCoursesCommand();
+            });
+        }
+
+        private string termstartdate = string.Empty;
+
+        public string TermStartDate
+        {
+            get { return termstartdate; }
+            set { SetProperty(ref termstartdate, value); }
+        }
+
+        private string termenddate = string.Empty;
+
+        public string TermEndDate
+        {
+            get { return termenddate; }
+            set { SetProperty(ref termenddate, value); }
         }
 
         private async Task ExecuteLoadCoursesCommand()

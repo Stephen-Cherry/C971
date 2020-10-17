@@ -6,16 +6,16 @@ using Xamarin.Forms;
 
 namespace C971.Views
 {
-    public partial class CourseDisplayPage : ContentPage
+    public partial class TermDisplayPage : ContentPage
     {
-        private CourseDisplayViewModel viewModel { get; set; }
+        private TermDisplayViewModel viewModel { get; set; }
 
-        public CourseDisplayPage(CourseDisplayViewModel viewModel)
+        public TermDisplayPage(TermDisplayViewModel viewModel)
         {
             InitializeComponent();
-            this.viewModel = viewModel;
-            BindingContext = this.viewModel;
+            BindingContext = this.viewModel = viewModel;
         }
+
 
         private async void Add_Clicked(object sender, EventArgs e)
         {
@@ -38,9 +38,13 @@ namespace C971.Views
             }
         }
 
-        private async void Course_Clicked(object sender, EventArgs e)
+        private async void Course_Clicked(object sender, SelectedItemChangedEventArgs args)
         {
-            await Navigation.PushAsync(new AssessmentDisplayPage());
+            Course course = args.SelectedItem as Course;
+            if (course == null)
+            { return; }
+            await Navigation.PushAsync(new CourseDisplayPage(new CourseDisplayViewModel(course)));
+            CoursesListView.SelectedItem = null;
         }
 
         protected override void OnAppearing()

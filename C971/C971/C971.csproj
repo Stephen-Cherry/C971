@@ -29,37 +29,43 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\AssessmentDisplayPage.xaml.cs">
+    <Compile Update="Views\AddModify\AddModifyAssessmentPage.xaml.cs">
+      <DependentUpon>AddModifyAssessmentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Displays\AssessmentDisplayPage.xaml.cs">
       <DependentUpon>AssessmentDisplayPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\CourseDisplayPage.xaml.cs">
+    <Compile Update="Views\Displays\CourseDisplayPage.xaml.cs">
       <DependentUpon>CourseDisplayPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\AddModifyTermPage.xaml.cs">
+    <Compile Update="Views\Displays\TermDisplayPage.xaml.cs">
+      <DependentUpon>TermDisplayPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AddModify\AddModifyTermPage.xaml.cs">
       <DependentUpon>AddModifyTermPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\AddModifyCoursePage.xaml.cs">
+    <Compile Update="Views\AddModify\AddModifyCoursePage.xaml.cs">
       <DependentUpon>AddModifyCoursePage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\TermDisplayPage.xaml.cs">
-      <DependentUpon>TermDisplayPage.xaml</DependentUpon>
+    <Compile Update="Views\Displays\MasterDisplayPage.xaml.cs">
+      <DependentUpon>MasterDisplayPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\AssessmentDisplayPage.xaml">
+    <EmbeddedResource Update="Views\Displays\CourseDisplayPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\NewAssessmentPage.xaml">
+    <EmbeddedResource Update="Views\AddModify\AddModifyAssessmentPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AddModifyCoursePage.xaml">
+    <EmbeddedResource Update="Views\AddModify\AddModifyCoursePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AddModifyTermPage.xaml">
+    <EmbeddedResource Update="Views\AddModify\AddModifyTermPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CourseDisplayPage.xaml">
+    <EmbeddedResource Update="Views\Displays\TermDisplayPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

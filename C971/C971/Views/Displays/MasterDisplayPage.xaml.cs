@@ -5,15 +5,15 @@ using Xamarin.Forms;
 
 namespace C971.Views
 {
-    public partial class TermDisplayPage : ContentPage
+    public partial class MasterDisplayPage : ContentPage
     {
-        private TermDisplayViewModel viewModel;
+        private MasterDisplayViewModel viewModel;
 
-        public TermDisplayPage()
+        public MasterDisplayPage()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new TermDisplayViewModel();
+            BindingContext = viewModel = new MasterDisplayViewModel();
         }
 
         private async void Add_Clicked(object sender, EventArgs args)
@@ -26,7 +26,7 @@ namespace C971.Views
             Term term = args.SelectedItem as Term;
             if (term == null)
             { return; }
-            await Navigation.PushAsync(new CourseDisplayPage(new CourseDisplayViewModel(term)));
+            await Navigation.PushAsync(new TermDisplayPage(new TermDisplayViewModel(term)));
 
             TermsListView.SelectedItem = null;
         }
