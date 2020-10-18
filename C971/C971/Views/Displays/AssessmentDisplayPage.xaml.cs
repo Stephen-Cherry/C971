@@ -23,7 +23,7 @@ namespace C971.Views
 
         private async void Edit_Clicked(object sender, EventArgs args)
         {
-            await Navigation.PushModalAsync(new NavigationPage(new AddModifyAssessmentPage(new AddModifyAssessmentViewModel(viewModel.Assessment))));
+            await Navigation.PushModalAsync(new NavigationPage(new AddModifyAssessmentPage(new AddModifyAssessmentViewModel(viewModel.Assessment.CourseID, viewModel.Assessment))));
         }
 
         private async void Delete_Clicked(object sender, EventArgs args)

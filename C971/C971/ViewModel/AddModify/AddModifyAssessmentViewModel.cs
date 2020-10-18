@@ -1,11 +1,15 @@
 ﻿using C971.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace C971.ViewModel
 {
     public class AddModifyAssessmentViewModel : BaseViewModel
     {
+        public Course ParentCourse { get; set; }
+        public bool ParentHasObjective { get; set; }
+        public bool ParentHasPerformance { get; set; }
         public Assessment Assessment { get; set; }
         public IList<AssessmentType> AssessmentTypeList { get; set; }
         public bool IsNewAssessment { get; set; }
@@ -40,27 +44,45 @@ namespace C971.ViewModel
             }
         }
 
-        public string AssessmentNotes
-        {
-            get { return Assessment.AssessmentNotes; }
-            set
-            {
-                Assessment.AssessmentNotes = value;
-                OnPropertyChanged();
-            }
-        }
-
-        async void InitializeAssessmentTypeList()
+        private async void InitializeAssessmentTypeList()
         {
             AssessmentTypeList = await DataStore.GetAssessmentTypesAsync();
         }
 
-        public AddModifyAssessmentViewModel(Assessment assessment = null)
+        private async void InitializeParentCourse()
         {
+            ParentCourse = await DataStore.GetCourseAsync(Assessment.CourseID);
+        }
+
+        private async void ParentAssessmentTypesCheck()
+        {
+            IList<Assessment> assessments = await DataStore.GetAssessmentsAsync();
+            foreach (Assessment assessment in assessments)
+            {
+                if (assessment.CourseID == ParentCourse.CourseID)
+                {
+                    if (assessment.AssessmentType == AssessmentType.Objective)
+                    {
+                        ParentHasObjective = true;
+                    }
+                    else if (assessment.AssessmentType == AssessmentType.Performance)
+                    {
+                        ParentHasPerformance = true;
+                    }
+                }
+            }
+        }
+
+        public AddModifyAssessmentViewModel(int courseID, Assessment assessment = null)
+        {
+            ParentHasPerformance = false;
+            ParentHasObjective = false;
             IsNewAssessment = assessment == null;
             InitializeAssessmentTypeList();
             Title = IsNewAssessment ? "Add Assessment" : "Edit Assessment";
-            Assessment = assessment ?? new Assessment();
+            Assessment = assessment ?? new Assessment() { CourseID = courseID };
+            InitializeParentCourse();
+            ParentAssessmentTypesCheck();
         }
     }
 }

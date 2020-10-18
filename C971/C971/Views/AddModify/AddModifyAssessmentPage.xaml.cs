@@ -1,4 +1,5 @@
 ﻿using C971.Models;
+using C971.Services;
 using C971.ViewModel;
 using System;
 
@@ -19,11 +20,11 @@ namespace C971.Views
             BindingContext = this.viewModel;
         }
 
-        public AddModifyAssessmentPage()
+        public AddModifyAssessmentPage(int courseID)
         {
             InitializeComponent();
 
-            viewModel = new AddModifyAssessmentViewModel();
+            viewModel = new AddModifyAssessmentViewModel(courseID);
             BindingContext = viewModel;
             viewModel.AssessmentDueDate = DateTime.Now;
         }
@@ -35,7 +36,17 @@ namespace C971.Views
                 await DisplayAlert("Error", "New assessment must include a title.", "Ok");
                 return;
             }
-            var input = await DisplayAlert("Save", "Save Term?", "Yes", "No");
+            else if (AssessmentDueDate.Date > viewModel.ParentCourse.CourseStartDate || AssessmentDueDate.Date < viewModel.ParentCourse.CourseEndDate)
+            {
+                await DisplayAlert("Error", $"Assessment due date must be between parent course dates.\n\n{viewModel.ParentCourse.CourseTitle}\nStart Date: {viewModel.ParentCourse.CourseStartDate:dd-MMM-yyyy}\nEnd Date: {viewModel.ParentCourse.CourseEndDate:dd-MMM-yyyy}", "Ok");
+                return;
+            }
+            else if ((AssessmentType.SelectedItem.ToString() == "Objective" && viewModel.ParentHasObjective == true) || (AssessmentType.SelectedItem.ToString() == "Performance" && viewModel.ParentHasPerformance == true))
+            {
+                await DisplayAlert("Error", $"{viewModel.ParentCourse.CourseTitle} already has an assessment with the type of {AssessmentType.SelectedItem}.  A course may only have one of each assessment type.", "Ok");
+                return;
+            }
+            var input = await DisplayAlert("Save", "Save Assessment?", "Yes", "No");
             if (input == true)
             {
                 var message = viewModel.IsNewAssessment ? "SaveAssessment" : "UpdateAssessment";

@@ -38,9 +38,29 @@ namespace C971.Views
                 await DisplayAlert("Error", "New course must include a title.", "Ok");
                 return;
             }
-            if (CourseStartDate.Date > CourseEndDate.Date)
+            else if (InstructorName.Text == null)
+            {
+                await DisplayAlert("Error", "New course must include an instructor name.", "Ok");
+                return;
+            }
+            else if(InstructorEmail.Text == null)
+            {
+                await DisplayAlert("Error", "New course must include an instructor email.", "Ok");
+                return;
+            }
+            else if(InstructorPhone.Text == null)
+            {
+                await DisplayAlert("Error", "New course must include an instructor phone.", "Ok");
+                return;
+            }
+            else if(CourseStartDate.Date > CourseEndDate.Date)
             {
                 await DisplayAlert("Error", "The start date must be before the end date.", "Ok");
+                return;
+            }
+            else if (!InstructorEmail.Text.Contains("@") || !InstructorEmail.Text.Contains("."))
+            {
+                await DisplayAlert("Error", "Email address must contain a \"@\" and a \".\".", "Ok");
                 return;
             }
             var input = await DisplayAlert("Save", "Save Course?", "Yes", "No");

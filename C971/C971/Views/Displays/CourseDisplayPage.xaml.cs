@@ -24,7 +24,15 @@ namespace C971.Views
 
         private async void Add_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new NavigationPage(new AddModifyAssessmentPage()));
+            if (viewModel.Assessments.Count < 2)
+            {
+                await Navigation.PushModalAsync(new NavigationPage(new AddModifyAssessmentPage(viewModel.Course.CourseID)));
+            }
+            else
+            {
+                await DisplayAlert("Course Limit Reached", $"{viewModel.CourseTitle} has reached the Assessment limit of 2.", "Ok");
+            }
+            
         }
 
         private async void Edit_Clicked(object sender, EventArgs args)

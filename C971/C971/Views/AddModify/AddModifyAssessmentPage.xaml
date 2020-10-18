@@ -14,11 +14,9 @@
                 <Label Text="Assessment Title:" FontSize="Medium" />
                 <Entry x:Name="AssessmentTitle" Text="{Binding AssessmentTitle}" Placeholder="Assessment Title" FontSize="Small" />
                 <Label Text="Due Date:" FontSize="Medium" />
-                <DatePicker x:Name="AssessmentStartDate" Date="{Binding AssessmentDueDate}" FontSize="Small" />
+                <DatePicker x:Name="AssessmentDueDate" Date="{Binding AssessmentDueDate}" FontSize="Small" />
                 <Label Text="Assessment Type:" FontSize="Medium" />
                 <Picker x:Name="AssessmentType" ItemsSource="{Binding AssessmentTypeList}" SelectedItem="{Binding AssessmentType}" Title="Assessment Type" FontSize="Medium" />
-                <Label Text="Notes:" FontSize="Medium" />
-                <Editor x:Name="AssessmentNotes" AutoSize="TextChanges" Placeholder="Notes" FontSize="Small" Text="{Binding AssessmentNotes}" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

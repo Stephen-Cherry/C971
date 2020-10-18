@@ -36,7 +36,7 @@ namespace C971.Views
                 await DisplayAlert("Error", "New term must include a title.", "Ok");
                 return;
             }
-            if (StartDate.Date > EndDate.Date)
+            else if (StartDate.Date > EndDate.Date)
             {
                 await DisplayAlert("Error", "The start date must be before the end date.", "Ok");
                 return;

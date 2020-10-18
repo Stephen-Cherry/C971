@@ -1,7 +1,7 @@
 ﻿using C971.Models;
 using C971.ViewModel;
 using System;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace C971.Views
@@ -19,7 +19,14 @@ namespace C971.Views
 
         private async void Add_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new NavigationPage(new AddModifyCoursePage()));
+            if (viewModel.Courses.Count < 6)
+            {
+                await Navigation.PushModalAsync(new NavigationPage(new AddModifyCoursePage()));
+            }
+            else
+            {
+                await DisplayAlert("Course Limit Reached", $"{viewModel.TermTitle} has reached the course limit of 6.", "Ok");
+            }
         }
 
         private async void Edit_Clicked(object sender, EventArgs args)

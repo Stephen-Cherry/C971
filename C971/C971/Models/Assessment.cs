@@ -14,7 +14,6 @@ namespace C971.Models
         public string AssessmentTitle { get; set; }
         public AssessmentType AssessmentType { get; set; }
         public DateTime AssessmentDueDate { get; set; }
-        public string AssessmentNotes { get; set; }
     }
 
     public enum AssessmentType

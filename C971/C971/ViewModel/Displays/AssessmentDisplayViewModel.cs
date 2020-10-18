@@ -30,7 +30,6 @@ namespace C971.ViewModel
             AssessmentTitle = assessment.AssessmentTitle;
             AssessmentDueDate = assessment.AssessmentDueDate.ToString("dd-MMM-yyyy");
             AssessmentType = assessment.AssessmentType.ToString("");
-            AssessmentNotes = assessment.AssessmentNotes;
         }
 
         string assessmenttitle = string.Empty;
