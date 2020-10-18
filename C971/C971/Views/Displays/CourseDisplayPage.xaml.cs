@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -58,6 +58,21 @@ namespace C971.Views
             { return; }
             await Navigation.PushAsync(new AssessmentDisplayPage(new AssessmentDisplayViewModel(assessment)));
             AssessmentsListView.SelectedItem = null;
+        }
+
+        async void Share_Clicked(object sender, System.EventArgs e)
+        {
+            await ShareText(viewModel.CourseTitle, viewModel.CourseNotes);
+        }
+
+        public async Task ShareText(string course, string notes)
+        {
+            await Share.RequestAsync(new ShareTextRequest
+            {
+                Text = notes,
+                Title = "Share Notes",
+                Subject = course 
+            });
         }
 
         protected override void OnAppearing()

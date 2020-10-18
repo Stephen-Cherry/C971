@@ -39,7 +39,7 @@ namespace C971.Services
 
                     DB.Insert(new Term() {TermTitle = "Term 1", TermStartDate = new DateTime(2021, 1, 1), TermEndDate = new DateTime(2021, 12, 31) });
 
-                    DB.Insert(new Course() {CourseTitle = "Course 1", TermID = 1, CourseStartDate = new DateTime(2021, 1, 1), CourseEndDate = new DateTime(2021, 1, 31), CourseStatus = CourseStatuses.InProgress, InstructorName = "Stephen Cherry", InstructorPhone = "111-1111", InstructorEmail = "scherr3@wgu.edu", CourseNotes = "N/A" });
+                    DB.Insert(new Course() {CourseTitle = "Course 1", TermID = 1, CourseStartDate = new DateTime(2021, 1, 1), CourseEndDate = new DateTime(2021, 1, 31), CourseStatus = CourseStatuses.InProgress, InstructorName = "Stephen Cherry", InstructorPhone = "(765) 516-1302", InstructorEmail = "scherr3@wgu.edu", CourseNotes = "N/A" });
 
                     DB.Insert(new Assessment() { CourseID = 1, AssessmentTitle = "Assessment 1", AssessmentType = AssessmentType.Objective, AssessmentDueDate = new DateTime(2021, 1, 1) });
                     DB.Insert(new Assessment() { CourseID = 1, AssessmentTitle = "Assessment 2", AssessmentType = AssessmentType.Performance, AssessmentDueDate = new DateTime(2021, 2, 1) });
@@ -123,13 +123,14 @@ namespace C971.Services
         public async Task<bool> UpdateAssessmentAsync(Assessment assessment)
         {
             SQLiteConnection db = new SQLiteConnection(DBPath.dbPath);
-            Assessment tableAssessment = await GetAssessmentAsync(assessment.AssessmentID);
-            bool assessmentFound = tableAssessment != null;
+            Assessment AssessmentTable = await GetAssessmentAsync(assessment.AssessmentID);
+            bool assessmentFound = AssessmentTable != null;
             if (assessmentFound)
             {
-                tableAssessment.AssessmentTitle = assessment.AssessmentTitle;
-                tableAssessment.AssessmentDueDate = assessment.AssessmentDueDate;
-                db.Update(tableAssessment);
+                AssessmentTable.AssessmentTitle = assessment.AssessmentTitle;
+                AssessmentTable.AssessmentType = assessment.AssessmentType;
+                AssessmentTable.AssessmentDueDate = assessment.AssessmentDueDate;
+                db.Update(AssessmentTable);
             }
             return await Task.FromResult(assessmentFound);
         }
@@ -144,6 +145,11 @@ namespace C971.Services
                 CourseTable.CourseTitle = course.CourseTitle;
                 CourseTable.CourseStartDate = course.CourseStartDate;
                 CourseTable.CourseEndDate = course.CourseEndDate;
+                CourseTable.CourseStatus = course.CourseStatus;
+                CourseTable.InstructorName = course.InstructorName;
+                CourseTable.InstructorEmail = course.InstructorEmail;
+                CourseTable.InstructorPhone = course.InstructorPhone;
+                CourseTable.CourseNotes = course.CourseNotes;
                 db.Update(CourseTable);
             }
             return await Task.FromResult(courseFound);

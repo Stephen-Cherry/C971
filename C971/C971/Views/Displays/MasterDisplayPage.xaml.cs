@@ -31,10 +31,19 @@ namespace C971.Views
             TermsListView.SelectedItem = null;
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
-            base.OnAppearing();
 
+            base.OnAppearing();
+            if (MasterDisplayViewModel.FirstLaunch)
+            {
+                string notificationMessage = await viewModel.DateNotifications();
+                if (MasterDisplayViewModel.HasNotifications)
+                {
+                    await DisplayAlert("Important Notifications", notificationMessage, "Ok");
+                }
+                MasterDisplayViewModel.FirstLaunch = false;
+            }
             if (viewModel.Terms.Count == 0)
                 viewModel.LoadTermsCommand.Execute(null);
         }

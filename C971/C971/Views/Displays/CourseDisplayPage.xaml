@@ -15,6 +15,7 @@
             <Label HorizontalTextAlignment="Center" Text="{Binding InstructorEmail, StringFormat='{}Instructor Email: {0}'}" FontSize="Medium" />
             <Label HorizontalTextAlignment="Center" Text="{Binding InstructorPhone, StringFormat='{}Instructor Phone: {0}'}" FontSize="Medium" />
             <Label HorizontalTextAlignment="Center" Text="{Binding CourseNotes, StringFormat='{}Course Notes: {0}'}" FontSize="Medium" />
+            <Button Text="Share Notes" Clicked="Share_Clicked" HorizontalOptions="Center" />
             <BoxView Color="Gray" HeightRequest="8" />
             <Label HorizontalTextAlignment="Center" Text="{Binding CourseTitle, StringFormat='{0} Assessments'}" FontSize="Title" />
             <ListView x:Name="AssessmentsListView" ItemsSource="{Binding Assessments}" VerticalOptions="FillAndExpand" HasUnevenRows="true" 
