@@ -25,8 +25,7 @@ namespace C971.Views
 
             viewModel = new AddModifyAssessmentViewModel();
             BindingContext = viewModel;
-            viewModel.AssessmentStartDate = DateTime.Now;
-            viewModel.AssessmentEndDate = DateTime.Now;
+            viewModel.AssessmentDueDate = DateTime.Now;
         }
 
         private async void Save_Clicked(object sender, EventArgs e)
@@ -34,11 +33,6 @@ namespace C971.Views
             if (AssessmentTitle.Text == null)
             {
                 await DisplayAlert("Error", "New assessment must include a title.", "Ok");
-                return;
-            }
-            if (AssessmentStartDate.Date > AssessmentEndDate.Date)
-            {
-                await DisplayAlert("Error", "The start date must be before the end date.", "Ok");
                 return;
             }
             var input = await DisplayAlert("Save", "Save Term?", "Yes", "No");

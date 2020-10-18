@@ -26,8 +26,8 @@
                             <Grid BackgroundColor="LightGray" Margin="0,2,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10*" />
+                                    <RowDefinition Height="10*" />
                                     <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
@@ -37,8 +37,7 @@
                                 </Grid.ColumnDefinitions>
                                 <BoxView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Color="Gray" HeightRequest="1" />
                                 <Label Text="{Binding AssessmentTitle}"  Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" VerticalTextAlignment="Center" FontSize="Medium" FontAttributes="Bold"/>
-                                <Label Text="{Binding AssessmentStartDate, StringFormat='{}Start Date: {0:d-MMM-yyyy}'}" Grid.Row="1" Grid.Column="2" FontSize="Small" FontAttributes="Bold"/>
-                                <Label Text="{Binding AssessmentEndDate, StringFormat='{}End Date: {0:d-MMM-yyyy}'}" Grid.Row="2" Grid.Column="2" FontSize="Small" FontAttributes="Bold"/>
+                                <Label Text="{Binding AssessmentDueDate, StringFormat='{}Due Date: {0:d-MMM-yyyy}'}" Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" VerticalTextAlignment="Center" FontSize="Small" FontAttributes="Bold"/>
                                 <BoxView Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Color="Gray" HeightRequest="1" />
                             </Grid>
                         </ViewCell>

@@ -35,7 +35,7 @@ namespace C971.ViewModel
                 async (sender, assessment) =>
                 {
                     assessment.CourseID = course.CourseID;
-                    await DataStore.UpdateAssessmentAsync(assessment, assessment.CourseID);
+                    await DataStore.UpdateAssessmentAsync(assessment);
                     await ExecuteLoadAssessmentsCommand();
                 });
 

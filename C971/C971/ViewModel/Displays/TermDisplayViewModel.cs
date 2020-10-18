@@ -34,7 +34,7 @@ namespace C971.ViewModel
                 async (sender, course) =>
                 {
                     course.TermID = term.TermID;
-                    await DataStore.UpdateCourseAsync(course, course.CourseID);
+                    await DataStore.UpdateCourseAsync(course);
                     await ExecuteLoadCoursesCommand();
                 });
 
@@ -44,7 +44,7 @@ namespace C971.ViewModel
                      PopulateTermView(updatedTerm);
                  });
 
-            MessagingCenter.Subscribe<TermDisplayPage, Course>(this, "DeleteCourse",
+            MessagingCenter.Subscribe<CourseDisplayPage, Course>(this, "DeleteCourse",
             async (sender, course) =>
             {
                 await DataStore.DeleteCourseAsync(course);

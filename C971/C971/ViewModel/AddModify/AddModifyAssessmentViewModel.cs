@@ -20,25 +20,16 @@ namespace C971.ViewModel
             }
         }
 
-        public DateTime AssessmentStartDate
+        public DateTime AssessmentDueDate
         {
-            get { return Assessment.AssessmentStartDate; }
+            get { return Assessment.AssessmentDueDate; }
             set
             {
-                Assessment.AssessmentStartDate = value;
+                Assessment.AssessmentDueDate = value;
                 OnPropertyChanged();
             }
         }
 
-        public DateTime AssessmentEndDate
-        {
-            get { return Assessment.AssessmentEndDate; }
-            set
-            {
-                Assessment.AssessmentEndDate = value;
-                OnPropertyChanged();
-            }
-        }
         public AssessmentType AssessmentType
         {
             get { return Assessment.AssessmentType; }

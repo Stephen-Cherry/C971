@@ -18,7 +18,7 @@ namespace C971.ViewModel
             Assessment = assessment;
             PopulateAssessmentView(assessment);
 
-            MessagingCenter.Subscribe<AddModifyAssessmentPage, Assessment>(this, "UpdateAssesment",
+            MessagingCenter.Subscribe<AddModifyAssessmentPage, Assessment>(this, "UpdateAssessment",
                  (sender, updatedassessment) =>
                  {
                      PopulateAssessmentView(updatedassessment);
@@ -28,8 +28,8 @@ namespace C971.ViewModel
         private void PopulateAssessmentView(Assessment assessment)
         {
             AssessmentTitle = assessment.AssessmentTitle;
-            AssessmentStartDate = assessment.AssessmentStartDate.ToString("dd-MMM-yyyy");
-            AssessmentEndDate = assessment.AssessmentEndDate.ToString("dd-MMM-yyyy");
+            AssessmentDueDate = assessment.AssessmentDueDate.ToString("dd-MMM-yyyy");
+            AssessmentType = assessment.AssessmentType.ToString("");
             AssessmentNotes = assessment.AssessmentNotes;
         }
 
@@ -40,18 +40,18 @@ namespace C971.ViewModel
             set { SetProperty(ref assessmenttitle, value); }
         }
 
-        string assessmentstartdate = string.Empty;
-        public string AssessmentStartDate
+        string assessmentduedate = string.Empty;
+        public string AssessmentDueDate
         {
-            get { return assessmentstartdate; }
-            set { SetProperty(ref assessmentstartdate, value); }
+            get { return assessmentduedate; }
+            set { SetProperty(ref assessmentduedate, value); }
         }
 
-        string assessmentenddate = string.Empty;
-        public string AssessmentEndDate
+        string assessmenttype = string.Empty;
+        public string AssessmentType
         {
-            get { return assessmentenddate; }
-            set { SetProperty(ref assessmentenddate, value); }
+            get { return assessmenttype; }
+            set { SetProperty(ref assessmenttype, value); }
         }
 
         string assessmentnotes = string.Empty;

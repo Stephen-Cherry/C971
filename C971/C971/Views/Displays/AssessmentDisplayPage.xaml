@@ -6,10 +6,10 @@
     </ContentPage.ToolbarItems>
     <ScrollView>
         <StackLayout>
-            <Label HorizontalTextAlignment="Center" Text="{Binding AssessmentTitle}" FontSize="Title" />
-            <Label HorizontalTextAlignment="Center" Text="{Binding AssessmentStartDate, StringFormat='{}Start Date: {0:dd-MMM-yyyy}'}" FontSize="Medium" />
-            <Label HorizontalTextAlignment="Center" Text="{Binding AssessmentEndDate, StringFormat='{}End Date: {0:dd-MMM-yyyy}'}" FontSize="Medium" />
-            <Label HorizontalTextAlignment="Center" Text="{Binding AssessmentNotes}" FontSize="Medium" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding AssessmentTitle}"  FontSize="Title" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding AssessmentDueDate, StringFormat='{}Start Date: {0:dd-MMM-yyyy}'}" FontSize="Medium" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding AssessmentType, StringFormat='{}Assessment Type: {0}'}" FontSize="Medium" />
+            <Label HorizontalTextAlignment="Center" Text="{Binding AssessmentNotes, StringFormat='{}Notes: {0}'}" FontSize="Medium" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

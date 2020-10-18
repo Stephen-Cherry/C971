@@ -30,7 +30,7 @@ namespace C971.ViewModel
             MessagingCenter.Subscribe<AddModifyTermPage, Term>(this, "UpdateTerm",
                 async (sender, term) =>
                 {
-                    await DataStore.UpdateTermAsync(term, term.TermID);
+                    await DataStore.UpdateTermAsync(term);
                     await ExecuteLoadTermsCommand();
                 });
 
