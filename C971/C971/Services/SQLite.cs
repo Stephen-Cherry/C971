@@ -37,12 +37,12 @@ namespace C971.Services
                     DB.CreateTable<Course>();
                     DB.CreateTable<Assessment>();
 
-                    DB.Insert(new Term() {TermTitle = "Term 1", TermStartDate = new DateTime(2021, 1, 1), TermEndDate = new DateTime(2021, 12, 31) });
+                    DB.Insert(new Term() {TermTitle = "Term 1", TermStartDate = DateTime.Today.AddDays(-180) , TermEndDate = DateTime.Today });
 
-                    DB.Insert(new Course() {CourseTitle = "Course 1", TermID = 1, CourseStartDate = new DateTime(2021, 1, 1), CourseEndDate = new DateTime(2021, 1, 31), CourseStatus = CourseStatuses.InProgress, InstructorName = "Stephen Cherry", InstructorPhone = "(765) 516-1302", InstructorEmail = "scherr3@wgu.edu", CourseNotes = "N/A" });
+                    DB.Insert(new Course() {CourseTitle = "Course 1", TermID = 1, CourseStartDate = DateTime.Today.AddDays(-30), CourseEndDate = DateTime.Today, CourseStatus = CourseStatuses.InProgress, InstructorName = "Stephen Cherry", InstructorPhone = "(765) 516-1302", InstructorEmail = "scherr3@wgu.edu", CourseNotes = "N/A" });
 
-                    DB.Insert(new Assessment() { CourseID = 1, AssessmentTitle = "Assessment 1", AssessmentType = AssessmentType.Objective, AssessmentDueDate = new DateTime(2021, 1, 1) });
-                    DB.Insert(new Assessment() { CourseID = 1, AssessmentTitle = "Assessment 2", AssessmentType = AssessmentType.Performance, AssessmentDueDate = new DateTime(2021, 2, 1) });
+                    DB.Insert(new Assessment() { CourseID = 1, AssessmentTitle = "Assessment 1", AssessmentType = AssessmentType.Objective, AssessmentDueDate = DateTime.Today });
+                    DB.Insert(new Assessment() { CourseID = 1, AssessmentTitle = "Assessment 2", AssessmentType = AssessmentType.Performance, AssessmentDueDate = DateTime.Today.AddDays(-10) });
                 }
             }
             FirstLaunch = false;
