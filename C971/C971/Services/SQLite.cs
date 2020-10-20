@@ -2,6 +2,7 @@
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -28,6 +29,10 @@ namespace C971.Services
         {
             if (FirstLaunch == true)
             {
+                DB.CreateTable<Term>();
+                DB.CreateTable<Course>();
+                DB.CreateTable<Assessment>();
+
                 if (DB.Table<Term>().Count() == 0)
                 {
                     DB.DropTable<Term>();
