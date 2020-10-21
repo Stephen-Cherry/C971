@@ -8,7 +8,7 @@ namespace C971.ViewModel
     {
         public Course Course { get; set; }
 
-        public IList<CourseStatuses> CourseStatusList { get; set; }
+        public IList<string> CourseStatusList { get; set; }
 
         public bool IsNewCourse { get; set; }
 
@@ -50,6 +50,12 @@ namespace C971.ViewModel
                 Course.CourseStatus = value;
                 OnPropertyChanged();
             }
+        }
+
+        public string StringStatus
+        {
+            get { return Course.CourseStatus.ToFriendlyString(); }
+
         }
 
         public string InstructorName

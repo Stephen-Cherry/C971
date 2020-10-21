@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using C971.Models;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -67,6 +68,7 @@ namespace C971.Views
             if (input == true)
             {
                 var message = viewModel.IsNewCourse ? "SaveCourse" : "UpdateCourse";
+                viewModel.Course.CourseStatus = CourseStatus.SelectedItem.ToString().ToEnum();
                 MessagingCenter.Send(this, message, viewModel.Course);
                 await Navigation.PopModalAsync();
             }

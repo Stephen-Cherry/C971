@@ -18,7 +18,7 @@
             <Label Text="End Date:" FontSize="Medium" />
             <DatePicker x:Name="CourseEndDate" Date="{Binding CourseEndDate}" FontSize="Small" />
             <Label Text="Course Status:" FontSize="Medium" />
-            <Picker x:Name="CourseStatus" ItemsSource="{Binding CourseStatusList}" SelectedItem="{Binding CourseStatus}" Title="Course Status" FontSize="Medium" />
+            <Picker x:Name="CourseStatus" ItemsSource="{Binding CourseStatusList}" SelectedItem="{Binding StringStatus}" Title="Course Status" FontSize="Medium" />
             <Label Text="Instructor Name:" FontSize="Medium" />
             <Entry x:Name="InstructorName" Text="{Binding InstructorName}" Placeholder="Instructor Name" FontSize="Small" />
             <Label Text="Instructor Phone:" FontSize="Medium" />

@@ -223,13 +223,13 @@ namespace C971.Services
             return await Task.FromResult(IsSuccess);
         }
 
-        public async Task<IList<CourseStatuses>> GetCourseStatusesAsync()
+        public async Task<IList<string>> GetCourseStatusesAsync()
         {
-            List<CourseStatuses> CourseStatusList = new List<CourseStatuses>();
+            List<string> CourseStatusList = new List<string>();
 
             foreach (CourseStatuses coursestatus in (CourseStatuses[])Enum.GetValues(typeof(CourseStatuses)))
             {
-                CourseStatusList.Add(coursestatus);
+                CourseStatusList.Add(coursestatus.ToFriendlyString());
             }
             return await Task.FromResult(CourseStatusList);
         }

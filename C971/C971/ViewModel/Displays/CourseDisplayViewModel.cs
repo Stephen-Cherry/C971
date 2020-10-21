@@ -59,7 +59,7 @@ namespace C971.ViewModel
             CourseTitle = course.CourseTitle;
             CourseStartDate = course.CourseStartDate.ToString("dd-MMM-yyyy");
             CourseEndDate = course.CourseEndDate.ToString("dd-MMM-yyyy");
-            CourseStatus = course.CourseStatus.ToString();
+            CourseStatus = course.CourseStatus.ToFriendlyString();
             InstructorName = course.InstructorName;
             InstructorEmail = course.InstructorEmail;
             InstructorPhone = course.InstructorPhone;

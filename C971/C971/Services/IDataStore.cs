@@ -19,7 +19,7 @@ namespace C971.Services
         Task<Course> GetCourseAsync(int id);
         Task<IList<Course>> GetCoursesAsync();
         Task<bool> DeleteCourseAsync(Course course);
-        Task<IList<CourseStatuses>> GetCourseStatusesAsync();
+        Task<IList<string>> GetCourseStatusesAsync();
 
         Task<int> AddAssessmentAsync(Assessment assessment);
         Task<bool> UpdateAssessmentAsync(Assessment assessment);

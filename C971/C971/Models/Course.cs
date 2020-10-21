@@ -1,7 +1,6 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Text;
 
@@ -25,13 +24,46 @@ namespace C971.Models
 
     public enum CourseStatuses
     {
-        [Display(Name = "In Progress")]
         InProgress,
-        [Display(Name = "Completed")]
         Completed,
-        [Display(Name = "Dropped")]
         Dropped,
-        [Display(Name = "Plan To Take")]
         PlanToTake
+    }
+
+    public static class CourseStatusesExtensions
+    {
+        public static string ToFriendlyString(this CourseStatuses status)
+        {
+            switch (status)
+            {
+                case CourseStatuses.InProgress:
+                    return "In Progress";
+                case CourseStatuses.Completed:
+                    return "Completed";
+                case CourseStatuses.Dropped:
+                    return "Dropped";
+                case CourseStatuses.PlanToTake:
+                    return "Plan To Take";
+                default:
+                    return "";
+            }
+        }
+
+        public static CourseStatuses ToEnum(this string status)
+        {
+            switch (status)
+            {
+                case "In Progress":
+                    return CourseStatuses.InProgress;
+                case "Completed":
+                    return CourseStatuses.Completed;
+                case "Dropped":
+                    return CourseStatuses.Dropped;
+                case "Plan To Take":
+                    return CourseStatuses.PlanToTake;
+                default:
+                    return CourseStatuses.PlanToTake;
+            }
+        }
     }
 }
