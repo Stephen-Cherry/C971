@@ -11,6 +11,7 @@ namespace C971.Views
     public partial class AddModifyAssessmentPage : ContentPage
     {
         AddModifyAssessmentViewModel viewModel;
+        AssessmentType preChangedType;
 
         public AddModifyAssessmentPage(AddModifyAssessmentViewModel viewModel)
         {
@@ -18,6 +19,7 @@ namespace C971.Views
 
             this.viewModel = viewModel;
             BindingContext = this.viewModel;
+            preChangedType = viewModel.Assessment.AssessmentType;
         }
 
         public AddModifyAssessmentPage(int courseID)
@@ -41,10 +43,13 @@ namespace C971.Views
                 await DisplayAlert("Error", $"Assessment due date must be between parent course dates.\n\n{viewModel.ParentCourse.CourseTitle}\nStart Date: {viewModel.ParentCourse.CourseStartDate:dd-MMM-yyyy}\nEnd Date: {viewModel.ParentCourse.CourseEndDate:dd-MMM-yyyy}", "Ok");
                 return;
             }
-            else if ((AssessmentType.SelectedItem.ToString() == "Objective" && viewModel.ParentHasObjective == true) || (AssessmentType.SelectedItem.ToString() == "Performance" && viewModel.ParentHasPerformance == true))
+            else if ( preChangedType != (Models.AssessmentType)AssessmentType.SelectedItem)
             {
-                await DisplayAlert("Error", $"{viewModel.ParentCourse.CourseTitle} already has an assessment with the type of {AssessmentType.SelectedItem}.  A course may only have one of each assessment type.", "Ok");
-                return;
+                if (((Models.AssessmentType)AssessmentType.SelectedItem == Models.AssessmentType.Objective && viewModel.ParentHasObjective == true) || ((Models.AssessmentType)AssessmentType.SelectedItem == Models.AssessmentType.Performance && viewModel.ParentHasPerformance == true))
+                {
+                    await DisplayAlert("Error", $"{viewModel.ParentCourse.CourseTitle} already has an assessment with the type of {AssessmentType.SelectedItem}.  A course may only have one of each assessment type.", "Ok");
+                    return;
+                }
             }
             var input = await DisplayAlert("Save", "Save Assessment?", "Yes", "No");
             if (input == true)
