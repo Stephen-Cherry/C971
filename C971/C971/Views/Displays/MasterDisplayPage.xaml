@@ -22,7 +22,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="6*"/>
                                     <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="5*"/>
+                                    <ColumnDefinition Width="6*"/>
                                 </Grid.ColumnDefinitions>
                                 <BoxView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Color="Gray" HeightRequest="1" />
                                 <Label Text="{Binding TermTitle}"  Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" VerticalTextAlignment="Center" FontSize="Medium" FontAttributes="Bold"/>

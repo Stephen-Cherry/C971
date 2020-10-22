@@ -38,7 +38,7 @@ namespace C971.Views
                 await DisplayAlert("Error", "New assessment must include a title.", "Ok");
                 return;
             }
-            else if (AssessmentDueDate.Date > viewModel.ParentCourse.CourseStartDate || AssessmentDueDate.Date < viewModel.ParentCourse.CourseEndDate)
+            else if (AssessmentDueDate.Date < viewModel.ParentCourse.CourseStartDate || AssessmentDueDate.Date > viewModel.ParentCourse.CourseEndDate)
             {
                 await DisplayAlert("Error", $"Assessment due date must be between parent course dates.\n\n{viewModel.ParentCourse.CourseTitle}\nStart Date: {viewModel.ParentCourse.CourseStartDate:dd-MMM-yyyy}\nEnd Date: {viewModel.ParentCourse.CourseEndDate:dd-MMM-yyyy}", "Ok");
                 return;
